@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use lib 'lib', 
-	"$ENV{HOME}/lab/perl/Net-DAAP-Server/lib",
-	"$ENV{HOME}/hck/opensource-trunk/POE-Component-Server-HTTP/lib";
+use lib 'lib',
+        "$ENV{HOME}/lab/perl/Net-DAAP-DMAP/lib",
+        "$ENV{HOME}/lab/perl/Net-DAAP-Server/lib",
+        "$ENV{HOME}/hck/opensource-trunk/POE-Component-Server-HTTP/lib";
 use POE;
 use Net::DPAP::Server;
 
