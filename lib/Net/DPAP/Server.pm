@@ -17,8 +17,7 @@ sub find_tracks {
 
 
 sub server_info {
-    my $self = shift;
-    my $response = shift;
+    my ($self, $request, $response) = @_;
     $response->content( $self->_dmap_pack(
         [[ 'dmap.serverinforesponse' => [
             [ 'dmap.status' => 200 ],
