@@ -1,11 +1,14 @@
-use strict;
 package Net::DPAP::Server;
-use Net::DMAP::Server;
-use base qw( Net::DMAP::Server );
+use strict;
+use warnings;
 use Net::DPAP::Server::Image;
 use File::Find::Rule;
+use base qw( Net::DMAP::Server );
+our $VERSION = '0.01';
 
 sub protocol { 'dpap' }
+
+sub default_port { 8770 }
 
 sub find_tracks {
     my $self = shift;
@@ -14,7 +17,6 @@ sub find_tracks {
         $self->tracks->{ $track->dmap_itemid } = $track;
     }
 }
-
 
 sub server_info {
     my ($self, $request, $response) = @_;
