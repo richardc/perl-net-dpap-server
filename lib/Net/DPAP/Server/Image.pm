@@ -4,6 +4,7 @@ use warnings;
 use base qw( Class::Accessor::Fast );
 use File::Basename qw( basename );
 use Image::Info;
+use Imager;
 use Perl6::Slurp;
 
 __PACKAGE__->mk_accessors(qw(
@@ -41,11 +42,14 @@ sub dpap_hires {
 }
 
 
-# A thumbnail should be smaller 240x180 72dpi jpeg
-
 sub dpap_thumb {
     my $self = shift;
-    scalar slurp $self->file;
+    my $imager = Imager->new;
+    $imager->open( file => $self->file ) or die $imager->errstr;
+    my $thumbnail = $imager->scale( xpixels => 240 );
+    $thumbnail->write( type => 'jpeg', data => \my $data)
+      or die $thumbnail->errstr;
+    return $data;
 }
 
 
