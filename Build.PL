@@ -1,7 +1,7 @@
 use strict;
 use Module::Build;
 Module::Build->new(
-    module_name => 'Net::DAAP::Server',
+    module_name => 'Net::DPAP::Server',
     license     => 'perl',
     requires    => {
         'perl' => 5.006,
