@@ -1,6 +1,17 @@
 use strict;
 package Net::DPAP::Server;
 use base qw( Net::DAAP::Server );
+use Net::DPAP::Server::Image;
+use File::Find::Rule;
+
+sub find_tracks {
+    my $self = shift;
+    for my $file ( find name => "*.jpeg", in => $self->path ) {
+        my $track = Net::DPAP::Server::Image->new_from_file( $file );
+        $self->tracks->{ $track->dmap_itemid } = $track;
+    }
+}
+
 
 sub server_info {
     my $self = shift;
