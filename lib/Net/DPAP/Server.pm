@@ -4,6 +4,8 @@ use base qw( Net::DAAP::Server );
 use Net::DPAP::Server::Image;
 use File::Find::Rule;
 
+sub protocol { 'dpap' }
+
 sub find_tracks {
     my $self = shift;
     for my $file ( find name => "*.jpeg", in => $self->path ) {
