@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base qw( Class::Accessor::Fast );
 use Image::Info;
+use Perl6::Slurp;
 
 __PACKAGE__->mk_accessors(qw(
       file
@@ -19,6 +20,7 @@ sub new_from_file {
 
     my @stat = stat $file;
     my $info = Image::Info::image_info( $file );
+    $self->file( $file );
     $self->dmap_itemid( $stat[1] ); # the inode should be good enough
     $self->dmap_containeritemid( 0+$self );
     $self->dpap_aspectratio( $info->{width} / $info->{height} );
@@ -29,5 +31,12 @@ sub new_from_file {
 
     return $self;
 }
+
+sub dpap_picturedata {
+    my $self = shift;
+    slurp $self->file;
+}
+
+# A thumbnail should be 240x180 72dpi jpeg
 
 1;
