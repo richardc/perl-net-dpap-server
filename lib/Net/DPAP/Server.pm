@@ -33,10 +33,10 @@ sub server_info {
            ]]] ));
 }
 
-sub always_answer {
+sub _always_answer {
     my $self = shift;
     return qw( dmap.itemid ) if $self->uri =~ /dpap.(thumb|hires)/;
-    return ( $self->SUPER::always_answer, 'dpap.imagefilename' );
+    return ( $self->SUPER::_always_answer, 'dpap.imagefilename' );
 }
 
 1;
