@@ -41,3 +41,73 @@ sub _always_answer {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+Net::DPAP::Server - Provide a DPAP Server
+
+=head1 SYNOPSIS
+
+ use POE;
+ use Net::DPAP::Server;
+
+ my $server = Net::DAAP::Server->new(
+     path => '/my/photo/album',
+     port => 666,
+     name => "My holiday snaps",
+ );
+ $poe_kernel->run;
+
+
+=head1 DESCRIPTION
+
+Net::DPAP::Server takes a directory of JPEG files and makes it
+available to iPhoto and work-alikes which can use the Digital Photo
+Access Protocol
+
+=head1 METHODS
+
+=head2 new
+
+Creates a new dpap server, takes the following arguments
+
+=over
+
+=item path
+
+A directory that will be scanned for *.jpeg files to share.
+
+=item name
+
+The name of your DPAP share, will default to a combination of the
+module name, hostname, and process id.
+
+=item port
+
+The port to listen on, will default to the default port, 8770.
+
+=back
+
+=head1 CAVEATS
+
+Currently only shares .jpeg files.
+
+Doesn't support albums.
+
+=head1 AUTHOR
+
+Richard Clamp <richardc@unixbeard.net>
+
+=head1 COPYRIGHT
+
+Copyright 2004 Richard Clamp.  All Rights Reserved.
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+Net::DAAP::Client
+
+=cut
