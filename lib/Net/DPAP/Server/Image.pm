@@ -42,7 +42,6 @@ sub dpap_hires {
     scalar slurp $self->file;
 }
 
-
 sub dpap_thumb {
     my $self = shift;
     my $image = Image::Imlib2->load( $self->file );
