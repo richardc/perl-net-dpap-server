@@ -1,11 +1,7 @@
 #!perl
 use strict;
 use warnings;
-use Test::More tests => 4;
-use lib 'lib', "$ENV{HOME}/hck/acme-svn/Net-DPAP-Client/lib",
-  "$ENV{HOME}/lab/perl/Net-DAAP-Server/lib",
-  "$ENV{HOME}/lab/perl/Net-DAAP-DMAP/lib"
-  ;
+use Test::More tests => 3;
 use POE;
 use Net::DPAP::Server;
 use Net::DPAP::Client;
@@ -16,7 +12,7 @@ die "couldn't fork a server $!" unless defined $pid;
 unless ($pid) {
     my $server = Net::DPAP::Server->new( path  => 't/share',
                                          port  => $port,
-                                         debug => 1);
+                                         debug => 0 );
     $poe_kernel->run;
     exit;
 }
@@ -30,9 +26,6 @@ $client->port( $port );
 
 ok( my @albums = $client->connect, "could connect and grab albums" );
 is( scalar @albums, 1, "advertising 1 album" );
-
-use YAML;
-print Dump \@albums;
 
 is( scalar @{ $albums[0]->images }, 2, "2 images in that album");
 

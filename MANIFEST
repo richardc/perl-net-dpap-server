@@ -1,6 +1,7 @@
 Makefile.PL
 Build.PL
 META.yml
+Changes
 dpap_server
 lib/Net/DPAP/Server.pm
 lib/Net/DPAP/Server/Image.pm

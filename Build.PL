@@ -13,6 +13,7 @@ Module::Build->new(
         'Perl6::Slurp'      => 0,
     },
     build_requires => {
+        'Net::DPAP::Client' => 0,
         'Test::More' => 0,
     },
     create_makefile_pl => 'traditional',
