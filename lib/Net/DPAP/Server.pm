@@ -108,6 +108,6 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-Net::DAAP::Client
+Net::DPAP::Client
 
 =cut
