@@ -1,6 +1,7 @@
 use strict;
 package Net::DPAP::Server;
-use base qw( Net::DAAP::Server );
+use Net::DMAP::Server;
+use base qw( Net::DMAP::Server );
 use Net::DPAP::Server::Image;
 use File::Find::Rule;
 
