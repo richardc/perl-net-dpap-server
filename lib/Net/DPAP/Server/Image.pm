@@ -4,8 +4,9 @@ use warnings;
 use base qw( Class::Accessor::Fast );
 use File::Basename qw( basename );
 use Image::Info;
-use Imager;
+use Image::Imlib2;
 use Perl6::Slurp;
+use File::Temp;
 
 __PACKAGE__->mk_accessors(qw(
       file
@@ -44,12 +45,12 @@ sub dpap_hires {
 
 sub dpap_thumb {
     my $self = shift;
-    my $imager = Imager->new;
-    $imager->open( file => $self->file ) or die $imager->errstr;
-    my $thumbnail = $imager->scale( xpixels => 240 );
-    $thumbnail->write( type => 'jpeg', data => \my $data)
-      or die $thumbnail->errstr;
-    return $data;
+    my $image = Image::Imlib2->load( $self->file );
+    my $thumbnail = $image->create_scaled_image( 240, 0 );
+    $thumbnail->image_set_format("jpeg");
+    my $file = File::Temp->new;
+    $thumbnail->save( $file->filename );
+    return scalar slurp $file->filename;
 }
 
 
